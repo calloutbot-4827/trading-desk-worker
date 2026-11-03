@@ -1,7 +1,9 @@
 """web/ is published publicly: no secrets, no data path, no hard-coded FOMO URLs."""
 import os, pathlib, re
+import pytest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
+pytestmark = pytest.mark.skipif(not WEB.is_dir(), reason="web/ lives in the other repo")
 FILES = [p for p in WEB.rglob("*") if p.is_file() and p.suffix in (".html", ".js", ".css", ".json")]
 
 
